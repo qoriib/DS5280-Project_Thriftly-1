@@ -24,11 +24,16 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
   const clearCart = () => setCart([]);
 
   const value = {
     cart,
     addToCart,
+    removeFromCart,
     clearCart,
   };
 

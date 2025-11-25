@@ -9,7 +9,7 @@ const formatRupiah = (value) =>
   });
 
 function HeaderCart() {
-  const { cart } = useCart();
+  const { cart, removeFromCart } = useCart();
   const navigate = useNavigate();
   const total = cart.reduce((sum, item) => sum + (item.price || 0) * (item.qty || 0), 0);
 
@@ -54,9 +54,17 @@ function HeaderCart() {
                       {item.qty} × {formatRupiah(item.price || 0)}
                     </small>
                   </div>
-                  <span className="fw-bold">
-                    {formatRupiah((item.price || 0) * (item.qty || 0))}
-                  </span>
+                  <div className="d-flex flex-column align-items-end gap-1">
+                    <span className="fw-bold">
+                      {formatRupiah((item.price || 0) * (item.qty || 0))}
+                    </span>
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      Hapus
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
